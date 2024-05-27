@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Extension</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>My Extension</h1>
+    <button id="activate">Activate</button>
+    <script>
+        document.getElementById('activate').addEventListener('click', () => {
+            chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+                chrome.scripting.executeScript({
+                    target: { tabId: tabs[0].id },
+                    files: ['content.js']
+                });
+            });
+        });
+    </script>
+</body>
+</html>
